@@ -1,14 +1,20 @@
-<p style="color: green"><%= notice %></p>
 
-<h1>Articles</h1>
+    <div class= "container_c">
+    <% @articles.each do |article| %>
+    <br/>
+    <div class= "display_a">
 
-<div id="articles">
-  <% @articles.each do |article| %>
-    <%= render article %>
-    <p>
-      <%= link_to "Show this article", article %>
-    </p>
-  <% end %>
-</div>
-
-<%= link_to "New article", new_article_path %>
+         <h1 class="display-4"><%= article.title %></h1>
+         <h5 class="display-8"> Author: <%= article.user.email %> </h2>
+         <p class="lead_c"><%= article.content %> </p>
+           <div class="btn-group">
+              
+               <%= link_to "Show", article_path(article), class: "btn btn-primary btn-sm px-2 mx-2 my-2" %> 
+               <% if article.user == current_user%>
+               <%= link_to "Edit", edit_article_path(article), class: "btn btn-primary btn-sm px-2 mx-2 my-2"%> 
+               <%= button_to "Delete", article_path(article) , class: "btn btn-danger btn-sm px-2 mx-2 my-2", method: :delete, onclick: "return confirmDestroy('Are you sure want destroy this post?')" %>
+                <%end%>    
+           </div> 
+    </div> 
+    <% end %>
+    </div> 
